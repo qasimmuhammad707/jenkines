@@ -1,0 +1,17 @@
+pipeline {
+    agent any
+    stages {
+        stage('Clone') {
+            steps {
+                git credentialsId: 'github-token',
+                    url: 'https://github.com/YOUR_USERNAME/YOUR_REPO.git',
+                    branch: 'main'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                sh 'sudo cp index.html /var/www/html/index.html'
+            }
+        }
+    }
+}
